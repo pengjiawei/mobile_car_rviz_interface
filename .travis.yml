@@ -3,4 +3,4 @@ compiler:
 - gcc
 script:
 - pwd
-- cd cmake-build-release && cmake .. && make
+- cmake .. && make
