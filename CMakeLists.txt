@@ -4,6 +4,10 @@ project(mobile_car_rviz_interface)
 set(CMAKE_CXX_STANDARD 11)
 add_subdirectory(cpr)
 
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    add_definitions(-DDEBUG=1)
+endif()
+
 
 #for http and protobuf
 find_package(Protobuf REQUIRED)
@@ -26,5 +30,5 @@ include_directories(${CPR_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(include)
 
-add_executable(mobile_car_rviz_interface main.cpp src/pose.pb.cc src/map.pb.cc src/rviz_display_interface.cpp)
+add_executable(mobile_car_rviz_interface main.cpp src/pose.pb.cc src/map.pb.cc src/plan.pb.cc src/rviz_display_interface.cpp)
 target_link_libraries(mobile_car_rviz_interface ${CPR_LIBRARIES} ${Protobuf_LIBRARIES} ${catkin_LIBRARIES})
