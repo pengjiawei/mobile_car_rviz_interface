@@ -1,7 +1,8 @@
 language: cpp
-#compiler:
-#- gcc
-before_install:
-- sudo apt-get install cppcheck
+compiler: gcc
+
+install:
+  - sudo apt-get install cppcheck
+
 script:
-- cppcheck include/ src/
+  - cppcheck include/ src/
