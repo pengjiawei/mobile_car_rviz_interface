@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_subdirectory(cpr)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    add_definitions(-DDEBUG=1)
+    add_definitions(-DDEBUG)
 endif()
 
 

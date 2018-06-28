@@ -51,3 +51,15 @@ void DisplayInterface::displayPoint(const Point &point) {
     point_stamped.point.y = point.y();
     point_stamped.header.frame_id = "map";
 }
+
+void DisplayInterface::displayPath(const Pose& pose) {
+    geometry_msgs::PoseStamped ros_pose;
+    ros_pose.pose.position.x = pose.x() * 0.1;
+    ros_pose.pose.position.y = pose.y() * 0.1;
+    ros_pose.pose.position.z = 0.0;
+    ros_pose.pose.orientation = tf::createQuaternionMsgFromYaw(0.0);
+    ros_pose.header.frame_id = "map";
+    path.poses.push_back(ros_pose);
+    ROS_INFO("path size = %d\n",path.poses.size());
+    path.header.frame_id = "map";
+}
