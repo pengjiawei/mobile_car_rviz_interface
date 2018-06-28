@@ -25,23 +25,23 @@ int main(int argc,char** argv) {
         pose.ParseFromString(pose_response.text);
         ROS_INFO("%d,%d\n",pose.x(),pose.y());
 
-//        auto map_response = cpr::Get(cpr::Url{map_url});
-//        Map map;
-//        map.ParseFromString(map_response.text);
+        auto map_response = cpr::Get(cpr::Url{map_url});
+        Map map;
+        map.ParseFromString(map_response.text);
 
-//        auto plan_response = cpr::Get(cpr::Url{plan_url});
-//        Plan plan;
-//        plan.ParseFromString(plan_response.text);
-//        ROS_INFO("plan size = %d",plan.point_size());
+        auto plan_response = cpr::Get(cpr::Url{plan_url});
+        Plan plan;
+        plan.ParseFromString(plan_response.text);
+        ROS_INFO("plan size = %d",plan.point_size());
 
-//        auto point_response = cpr::Get(cpr::Url{point_url});
-//        Point point;
-//        point.ParseFromString(point_response.text);
+        auto point_response = cpr::Get(cpr::Url{point_url});
+        Point point;
+        point.ParseFromString(point_response.text);
 
         displayInterface->displayPose(pose);
-//        displayInterface->displayMap(map);
-//        displayInterface->displayPlan(plan);
-//        displayInterface->displayPoint(point);
+        displayInterface->displayMap(map);
+        displayInterface->displayPlan(plan);
+        displayInterface->displayPoint(point);
         displayInterface->displayPath(pose);
         displayInterface->update();
         ros::spinOnce();
