@@ -32,7 +32,7 @@ public:
     }
 
     void displayPose(const Pose& pose);
-    void displayMap(const Map& map);
+    void displayMap(const Map& map,const Plan &cover);
     void displayPlan(const Plan& plan);
     void displayPoint(const Point& point);
     void displayPath(const Pose& pose);
@@ -51,7 +51,7 @@ private:
     ros::Publisher map_publisher;
     ros::Publisher point_publisher;
     ros::Publisher path_publisher;
-//    const std::string scan_topic_name,pose_topic_name,pose_covariance_topic_name,point_topic_name;
+
     ros::NodeHandle nh_;
 
     geometry_msgs::PoseStamped geo_pose;

@@ -13,9 +13,10 @@ void DisplayInterface::displayPose(const Pose &pose) {
     geo_pose.pose.position.z = 0.0;
     geo_pose.pose.orientation = tf::createQuaternionMsgFromYaw(0.0);
     geo_pose.header.frame_id = "map";
+    int* p = new int(10);
 }
 
-void DisplayInterface::displayMap(const Map &map) {
+void DisplayInterface::displayMap(const Map &map,const Plan &cover) {
     int width = map.width();
     int height = map.height();
     ROS_INFO("width = %d,height = %d\n,map cell size = %d",width,height,map.mapcell_size());
@@ -34,14 +35,26 @@ void DisplayInterface::displayMap(const Map &map) {
             occ_grid.data[x + y * width] = 100;
         }
     }
-    occ_grid.header.frame_id = "map";
+    for (int i = 0; i < cover.point_size(); ++i) {
+        int map_x = cover.point(i).x();
+        int map_y = cover.point(i).y();
+        ROS_INFO("covered %d ,x = %d,y = %d\n",i,map_x,map_y);
+        occ_grid.data[map_x + map_y * width] = 50;
+    }
+
 }
 
 void DisplayInterface::displayPlan(const Plan &plan) {
     nav_msgs::Path path;
     for (int i = 0; i < plan.point_size(); ++i) {
         ROS_INFO("plan %d ,x = %d,y = %d\n",i,plan.point(i).x(),plan.point(i).y());
-        path.poses.push_back(geometry_msgs::PoseStamped());
+        geometry_msgs::PoseStamped pose;
+        pose.pose.position.x = plan.point(i).x() * 0.1;
+        pose.pose.position.y = plan.point(i).y() * 0.1;
+        pose.pose.position.z = 0.0;
+        pose.pose.orientation = tf::createQuaternionMsgFromYaw(0.0);
+        pose.header.frame_id = "map";
+        path.poses.push_back(pose);
     }
 }
 

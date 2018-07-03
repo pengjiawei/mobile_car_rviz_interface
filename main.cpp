@@ -8,10 +8,11 @@
     const std::string plan_url = "http://192.168.3.8:8080/plan";
     const std::string point_url = "http://192.168.3.8:8080/point";
 #else
-    const std::string pose_url = "http://192.168.3.11:8866/pose";
-    const std::string map_url = "http://192.168.3.11:8866/mymap";
-    const std::string plan_url = "http://192.168.3.11:8866/plan";
-    const std::string point_url = "http://192.168.3.11:8866/point";
+    const std::string pose_url = "http://192.168.31.26:8866/pose";
+    const std::string map_url = "http://192.168.31.26:8866/mymap";
+    const std::string plan_url = "http://192.168.31.26:8866/plan";
+    const std::string point_url = "http://192.168.31.26:8866/point";
+    const std::string cover_url = "http://192.168.31.26:8866/cover";
 #endif
 
 int main(int argc,char** argv) {
@@ -38,8 +39,13 @@ int main(int argc,char** argv) {
         Point point;
         point.ParseFromString(point_response.text);
 
+
+        auto cover_response = cpr::Get(cpr::Url{cover_url});
+        Plan cover;
+        cover.ParseFromString(cover_response.text);
+
         displayInterface->displayPose(pose);
-        displayInterface->displayMap(map);
+        displayInterface->displayMap(map,cover);
         displayInterface->displayPlan(plan);
         displayInterface->displayPoint(point);
         displayInterface->displayPath(pose);

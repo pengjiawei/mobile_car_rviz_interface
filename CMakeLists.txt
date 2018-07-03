@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.5)
 project(mobile_car_rviz_interface)
 
 set(CMAKE_CXX_STANDARD 11)
 add_subdirectory(cpr)
+
+option(CMAKE_EXPORT_COMPILE_COMMANDS "generate compile info" ON)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     add_definitions(-DDEBUG)
