@@ -39,7 +39,7 @@ void DisplayInterface::displayMap(const Map &map,const Plan &cover) {
         int map_x = cover.point(i).x();
         int map_y = cover.point(i).y();
         ROS_INFO("covered %d ,x = %d,y = %d\n",i,map_x,map_y);
-        occ_grid.data[map_x + map_y * width] = 50;
+        occ_grid.data[map_x + map_y * width] = 60;
     }
 
 }
